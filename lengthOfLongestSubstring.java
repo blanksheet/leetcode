@@ -56,16 +56,15 @@ public class lengthOfLongestSubstring {
         return ans;
     }
 
-    public int lengthOfLongestSubstring3(String s) {
+    public static int lengthOfLongestSubstring3(String s) { //优化滑动窗口
         int n = s.length(), ans = 0;
-        Map<Character, Integer> map = new HashMap<>(); // current index of character
-        // try to extend the range [i, j]
-        for (int j = 0, i = 0; j < n; j++) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (int j = 0, i = 0; j < n; j++) {   //j相当于头指针
             if (map.containsKey(s.charAt(j))) {
-                i = Math.max(map.get(s.charAt(j)), i);
+                i = Math.max(map.get(s.charAt(j)), i);//如发生重复 起始更新 选择i时说明二次发生重复并发生点在第一次之前 选择map.get(s.charAt(j))说明第一次发生重复
             }
             ans = Math.max(ans, j - i + 1);
-            map.put(s.charAt(j), j + 1);
+            map.put(s.charAt(j), j + 1);  //i相当于尾指针
         }
         return ans;
     }
@@ -74,6 +73,7 @@ public class lengthOfLongestSubstring {
         String string1 = "abcabcbb";
         String string2 = "bbbbb";
         String string3 = "pwwkew";
+        String string4="wlrbbmqbhcdarzowkkyhiddqscdxrjmowfrxsjybldbefsarcbynecdyggxxpklorellnmpapqfwkhopkmco";
 
         System.out.println(lengthOfLongestSubstring(string1));
         System.out.println(lengthOfLongestSubstring(string2));
@@ -82,5 +82,10 @@ public class lengthOfLongestSubstring {
         System.out.println(lengthOfLongestSubstring2(string1));
         System.out.println(lengthOfLongestSubstring2(string2));
         System.out.println(lengthOfLongestSubstring2(string3));
+
+        System.out.println(lengthOfLongestSubstring3(string1));
+        System.out.println(lengthOfLongestSubstring3(string2));
+        System.out.println(lengthOfLongestSubstring3(string3));
+        System.out.println(lengthOfLongestSubstring3(string4));
     }
 }
