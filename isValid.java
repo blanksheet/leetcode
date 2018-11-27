@@ -33,25 +33,19 @@ public class isValid {
                     if(temp == '{')
                       break;
                     else {
-                        save.push(temp);
-                        save.push(s.charAt(i));
-                        break;
+                       return false;
                     }
                 case ']':
                     if(temp == '[')
                       break;
                     else{
-                        save.push(temp);
-                        save.push(s.charAt(i));
-                        break;
+                        return false;
                     }
                 case ')':
                     if(temp == '(')
                       break;
                     else{
-                        save.push(temp);
-                        save.push(s.charAt(i));
-                        break;
+                        return false;
                     }
                 default:
                     save.push(temp);
