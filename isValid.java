@@ -57,10 +57,40 @@ public class isValid {
         return save.empty();
     }
 
+    public static boolean hashmapIsVailid(String s){
+        if(s.length()==0){
+            return true;
+        }
+
+        if(s.length()%2!=0){
+            return false;
+        }
+
+        HashMap<Character,Character> data = new HashMap();
+        data.put(')','(');
+        data.put('}','{');
+        data.put(']','[');
+
+        Stack<Character> check = new Stack();
+
+        for(int i=0; i<s.length(); i++){
+            if(data.containsKey(s.charAt(i))){
+                char temp = check.empty() ? '~':check.pop();
+                if(temp != data.get(s.charAt(i))){
+                    return false;
+                }
+            }
+            else{
+                check.push(s.charAt(i));
+            }
+        }
+        return check.empty();
+    }
 
 
     public static void main(String[] args){
         String ex1 = "(]";
         System.out.println(isValid(ex1));
+        System.out.println(hashmapIsVailid(ex1));
     }
 }
