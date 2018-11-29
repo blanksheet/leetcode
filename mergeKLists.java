@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by tianze
@@ -48,6 +46,31 @@ public class mergeKLists {
         return dummy.next.next;
     }
 
+    //优先队列
+    public static ListNode mergeKLists2(ListNode[] lists) {
+        ListNode dummy=new ListNode(-1);
+        ListNode node=dummy;
+        PriorityQueue<ListNode> pq=new PriorityQueue<ListNode>(new Comparator<ListNode>(){
+            public int compare(ListNode l1,ListNode l2){
+                return l1.val-l2.val;
+            }
+        });
+        for(ListNode head:lists){
+            if(head!=null){
+                pq.offer(head);
+            }
+        }
+        while(pq.size()>0){
+            node.next=pq.poll();
+            node=node.next;
+            if(node.next!=null){
+                pq.offer(node.next);
+            }
+        }
+        return dummy.next;
+    }
+
+
     public static void main(String[] args){
         ListNode l1 = new ListNode(1);
         ListNode l2 = new ListNode(4);
@@ -71,7 +94,7 @@ public class mergeKLists {
         test[1] = l4;
         test[2] = l7;
 
-        System.out.println(mergeKLists(test));
+        System.out.println(mergeKLists2(test));
     }
 
 }
