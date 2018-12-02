@@ -3,6 +3,8 @@
  * 2018/11/29 17:39
  */
 public class findMedianSortedArrays {
+
+    //参考代码 
     public double findMedianSortedArrays(int[] A, int[] B) {
         int m = A.length;
         int n = B.length;
