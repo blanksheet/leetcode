@@ -5,7 +5,7 @@ import java.util.Arrays;
  * 2018/12/7 20:20
  */
 public class minNumberInRotateArray {
-    public int minNumberInRotateArray(int [] array) {
+    public static int minNumberInRotateArray(int [] array) {
         if(array == null || array.length == 0){
             return 0;
         }
@@ -38,5 +38,10 @@ public class minNumberInRotateArray {
         }
 
         return array[res];
+    }
+
+    public static void main(String[] args){
+        int[] array = {1,0,1,1,1};
+        System.out.println(minNumberInRotateArray(array));
     }
 }
