@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by tianze
@@ -33,4 +34,25 @@ public class inorderTraversal {
         recursive(result, root.right);
         return result;
     }
+
+    public List<Integer> inorderTraversal2(TreeNode root){
+        LinkedList<Integer> result = new LinkedList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        while(root != null || !stack.empty()){
+            if(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            else {
+                root = stack.pop();
+                result.add(root.val);
+                root = root.right;
+            }
+
+        }
+
+        return result;
+    }
+
 }
