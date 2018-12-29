@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * Created by tianze
@@ -50,8 +51,44 @@ public class largestRectangleArea {
         return max;
     }
 
+    public static int largestRectangleArea2(int[] heights){
+        if(heights == null || heights.length == 0){
+            return 0;
+        }
+
+        Stack<Integer> stack = new Stack<>();
+        int max = 0;
+
+        for(int i = 0; i < heights.length; i++){
+            while (!stack.empty() && heights[i] < heights[stack.peek()]){
+                int temp = stack.pop();
+                if(stack.empty()){
+                    max = Math.max(heights[temp] * i,max);
+                }
+                else {
+                    max = Math.max(heights[temp] * (i - stack.peek() - 1),max);
+                }
+
+            }
+            stack.push(i);
+        }
+
+        while (!stack.empty()){
+            int temp = stack.pop();
+            if(stack.empty()){
+                max = Math.max(heights[temp] * heights.length,max);
+            }
+            else {
+                max = Math.max(heights[temp] * (heights.length - stack.peek() - 1),max);
+            }
+
+        }
+
+        return max;
+    }
+
     public static void main(String[] args){
-        int[] array = {0,9};
-        System.out.println(largestRectangleArea(array));
+        int[] array = {2,1,5,6,2,3};
+        System.out.println(largestRectangleArea2(array));
     }
 }
