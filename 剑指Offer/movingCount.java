@@ -3,7 +3,7 @@
  * 2019/1/14 20:40
  */
 public class movingCount {
-    //static int count = 0;
+    static int count = 0;
 
     public static int movingCount(int threshold, int rows, int cols)
     {
@@ -15,14 +15,14 @@ public class movingCount {
 
         helper(flag, 0, 0,threshold);
 
-        int count = 0;
+       /* int count = 0;
         for(int i = 0; i < rows ; i ++){
             for(int j = 0; j < cols; j ++){
                 if(flag[i][j] == 1){
                     count++;
                 }
             }
-        }
+        }*/
 
         return count;
     }
@@ -36,6 +36,7 @@ public class movingCount {
         }
 
         array[rows][cols] = 1;
+        count++;
         helper(array,rows - 1, cols,threshold);
         helper(array,rows + 1, cols,threshold);
         helper(array,rows , cols - 1,threshold);
