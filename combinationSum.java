@@ -7,7 +7,7 @@ import java.util.List;
  * 2019/1/19 16:06
  */
 public class combinationSum {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> result = new ArrayList<>();
         if(candidates == null || candidates.length == 0){
             return result;
@@ -19,7 +19,7 @@ public class combinationSum {
         return result;
     }
 
-    private void helper(int[] candidates, int start, int target,ArrayList<Integer> item, List<List<Integer>> result){
+    private static void helper(int[] candidates, int start, int target,ArrayList<Integer> item, List<List<Integer>> result){
         if(target < 0){
             return;
         }
@@ -34,5 +34,10 @@ public class combinationSum {
             helper(candidates, i, target - candidates[i], item, result);
             item.remove(item.size() - 1);
         }
+    }
+
+    public static void main(String[] args){
+        int[] candidates = {2,3,5};
+        combinationSum(candidates,8);
     }
 }
