@@ -64,14 +64,14 @@ public class maxPoints {
 
         int max = 0;
         for(int i = 0; i < points.length; i++){
-            HashMap<BigDecimal, Integer> hashMap = new HashMap();
+            HashMap<Double, Integer> hashMap = new HashMap();
             int duplicate = 0;
             int localMax = 1;
 
             int x1 = points[i].x, y1 = points[i].y;
             for(int j = i + 1; j < points.length; j++){
                 int x2 = points[j].x, y2 = points[j].y;
-                BigDecimal slope =  BigDecimal.valueOf(0);
+                double slope =  0;
 
                 if(x1 == x2 && y1 == y2){
                     duplicate++;
@@ -79,15 +79,15 @@ public class maxPoints {
                 }
 
                 if(x1 == x2){
-                    slope = BigDecimal.valueOf(Integer.MAX_VALUE);
+                    slope = Double.MIN_VALUE;
                 }
                 if(y1 == y2){
-                    slope = BigDecimal.valueOf(0);
+                    slope = 0;
                 }
                 if(x1 != x2 && y1 != y2){
                     double temp1 = y1 - y2;
                     double temp2 = x1 - x2;
-                    slope = BigDecimal.valueOf(temp1/temp2);
+                    slope = temp1 / temp2;
                 }
 
                 if(hashMap.containsKey(slope)){
