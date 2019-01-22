@@ -79,7 +79,7 @@ public class maxPoints {
                 }
 
                 if(x1 == x2){
-                    slope = Double.MIN_VALUE;
+                    slope = Double.MAX_VALUE;
                 }
                 if(y1 == y2){
                     slope = 0;
