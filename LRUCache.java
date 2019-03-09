@@ -19,7 +19,7 @@ public class LRUCache  {
     private int capacity;
     private int num;
     private HashMap<Integer, Node> map;
-    private Node first, last;   //firstΪ��ͷ Ϊɾ���ĵ�һ��Ԫ�� lastΪ��β ���ɾ����Ԫ��
+    private Node first, last;   //first为队头 为删除的第一个元素 last为队尾 最后删除的元素
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
@@ -32,20 +32,20 @@ public class LRUCache  {
     public int get(int key) {
         Node node = map.get(key);
 
-        //����Կ������
+        //该密钥不存在
         if(node == null){
             return -1;
         }
         else if(node != last){
-            if(node == first){
+            if(node == first){  //获取节点为当前下一个被删除的节点
                 first = first.next;
             }
-            else {
+            else {              //获取节点为队列中节点
                 node.pre.next = node.next;
             }
 
-            node.next.pre = node.pre;
-            last.next = node;
+            node.next.pre = node.pre;   //修改反向队列顺序 形成删除节点
+            last.next = node;    //将改节点插入last
             node.pre = last;
             node.next = null;
             last = node;
@@ -59,8 +59,8 @@ public class LRUCache  {
 
         if(node == null){
             Node newNode = new Node(key,value);
-            if(num >= capacity){
-                map.remove(first.key);   //�Ƴ���һ��Ԫ��
+            if(num >= capacity){   //超出资源 删除节点
+                map.remove(first.key);   //移除第一个元素
                 first = first.next;
                 if(first != null){
                     first.pre = null;
@@ -79,9 +79,26 @@ public class LRUCache  {
             }
 
             newNode.pre = last;
-            last = newNode;      //����last
+            last = newNode;      //更新last
             map.put(key, newNode);
             num++;
+        }
+        else {
+            node.value = value;
+            if(node != last){
+                if(node == first){
+                    first = first.next;
+                }
+                else {
+                    node.pre.next = node.next;
+                }
+
+                node.next.pre = node.pre;
+                last.next = node;
+                node.pre = last;
+                node.next = null;
+                last = node;
+            }
         }
     }
 }
